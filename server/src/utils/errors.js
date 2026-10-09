@@ -30,3 +30,9 @@ export class NotFoundError extends ApiError {
     super(404, message)
   }
 }
+
+export class PaymentError extends ApiError {
+  constructor(message = 'Payment failed') {
+    super(402, message)
+  }
+}
