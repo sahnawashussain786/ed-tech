@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "$comment": "Static frontend from client/, backend from api/ (serverless, MongoDB via env vars).",
   "buildCommand": "cd client && npm install && npm run build",
   "outputDirectory": "client/dist",
   "cleanUrls": true,

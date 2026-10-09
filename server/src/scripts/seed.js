@@ -1036,11 +1036,13 @@ async function seed() {
   for (const c of createdCourses) await recomputeCourseRating(c._id)
 
   console.log('✓ Seed complete —', createdCourses.length, 'courses,', users.length, 'featured users +', extraStudents.length, 'students')
-  console.log('  instructor@learnhub.dev / password123  (instructor: 5 courses)')
-  console.log('  grace@learnhub.dev     / password123  (instructor: 5 courses)')
-  console.log('  maya@learnhub.dev      / password123  (instructor: 2 courses)')
-  console.log('  kenji@learnhub.dev     / password123  (instructor: 6 courses)')
-  console.log('  amara@learnhub.dev     / password123  (instructor: 4 courses)')
+  // Count actual course ownership so the printed summary is accurate
+  const ownedBy = (email) => createdCourses.filter((c) => String(c.instructor) === String(createdUsers[email]?._id)).length
+  console.log(`  instructor@learnhub.dev / password123  (instructor: ${ownedBy('instructor@learnhub.dev')} courses)`)
+  console.log(`  grace@learnhub.dev     / password123  (instructor: ${ownedBy('grace@learnhub.dev')} courses)`)
+  console.log(`  maya@learnhub.dev      / password123  (instructor: ${ownedBy('maya@learnhub.dev')} courses)`)
+  console.log(`  kenji@learnhub.dev     / password123  (instructor: ${ownedBy('kenji@learnhub.dev')} courses)`)
+  console.log(`  amara@learnhub.dev     / password123  (instructor: ${ownedBy('amara@learnhub.dev')} courses)`)
   console.log('  student@learnhub.dev   / password123  (student: 4 enrollments + orders)')
 
   await mongoose.disconnect()
